@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sleepines Levels
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Sleepines Levels</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <div id="sleepyStart" style="display: flex;"><br/><hr><hr>
+      <div>
+      <ion-label id="startLabel" position="stacked" style="font-size:xx-large;">Sleepy Time Start</ion-label>
+      </div><br/><hr>
+      <ion-datetime id="sleepyStartTime" presentation="date-time" prefer-wheel="true" displayFormat="YYYY-MMM-dd HH:mm" [(ngModel)]="sleepyStartTime"></ion-datetime>
+    </div><br/><hr><br/>
+
+    <div id="sleepyEnd" style="display: flex;">
+      <div id="endLabel">
+      <ion-label position="stacked" style="font-size:xx-large;">Sleepy Time End</ion-label>
+      </div><br/><hr>
+      <ion-datetime id="sleepyEndTime" presentation="date-time" prefer-wheel="true" displayFormat="YYYY-MMM-dd HH:mm" [(ngModel)]="sleepyEndTime"></ion-datetime>
+    </div><br/>
+
+    <div id="sleepySubmit" style="display: flex;">
+      <ion-button (click)="logSleep(true)">Log Sleep</ion-button>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="ERROR"
+        message="You must input an End Time date later than the Start Time date."
+        [buttons]="alertButtons"
+        (didDismiss)="logSleep(false)">
+      </ion-alert>
+    </div>
+
+  <div id="barTick" style="display: none;">
+    <ion-label id="rate">Rate your sleepiness level</ion-label>
+    <ion-item id="sleepLevelBar"> 
+      <ion-range
+        aria-label="Custom range"
+        [min]="1"
+        [max]="7"
+        [value]="4"
+        [pin]="true"
+        [ticks]="true"
+        [snaps]="true"
+        (ionChange)="onSleepyValueChange($event)">
+      </ion-range>
+    </ion-item>
+  </div>
+
+  <div id="scaleDescriptions">
+    <ion-label id="scale1" style="display:none;">Feeling active, vital, alert, or wide awake</ion-label>
+    <ion-label id="scale2" style="display:none;">Functioning at high levels, but not at peak; able to concentrate</ion-label>
+    <ion-label id="scale3" style="display:none;">Awake, but relaxed; responsive but not fully alert</ion-label>
+    <ion-label id="scale4" style="display:none;">Somewhat foggy, let down</ion-label>
+    <ion-label id="scale5" style="display:none;">Foggy; losing interest in remaining awake; slowed down</ion-label>
+    <ion-label id="scale6" style="display:none;">Sleepy, woozy, fighting sleep; prefer to lie down</ion-label>
+    <ion-label id="scale7" style="display:none;">No longer fighting sleep, sleep onset soon; having dream-like thoughts</ion-label>
+  </div>
+  <div id="logLevel" style="display:none;">
+    <ion-button (click)="back()">Back</ion-button>
+    <ion-button id="logLevelSubmit" (click)="logLevel()">Log Level</ion-button>
+    <ion-toast trigger="logLevelSubmit" message="Logged Data Saved!" position="middle" [duration]="5000"></ion-toast>
+  </div>
+
+</ion-content>

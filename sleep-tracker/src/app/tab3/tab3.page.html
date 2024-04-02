@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      zzzZOT
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Display Current Time -->
+  <div id="currentTime">
+    <h1>{{ currentTime | date: 'shortTime' }}</h1>
+  </div>
+  <div id="currentDate">
+    <h2>{{ getCurrentDate() }}</h2>
+  </div>
+
+  <div id="options" style="display: block;">
+    <ion-button id="linkSleepData" (click)="toggleDataView('sleepData')">View Sleep Data</ion-button>
+    <ion-button id="linkSleepinessData" (click)="toggleDataView('sleepinessData')">View Sleepiness Data</ion-button>    
+  </div>
+
+  <div id="images">
+    <ion-img src="../../assets/moon.png" style="width: 50%; height: 50%;"></ion-img>
+    <ion-img src="../../assets/anteater.png"></ion-img>
+  </div>
+
+  <div id="returnHome" style="display: none;">
+    <ion-button id="homeButton" (click)="toggleDataView('returnHome')">Home</ion-button>    
+  </div>
+
+    <!-- Display Overnight Sleep Data -->
+    <div id="sleepData" style="display: none;">
+      <h2>Overnight Sleep Data</h2>
+      <ion-list>
+        <ion-item *ngFor="let data of overnightData">
+          <h3>{{ data.dateString() }}</h3>
+          <p>{{ data.summaryString() }}</p>
+        </ion-item>
+      </ion-list>
+    </div>
+  
+    <!-- Display Sleepiness Data -->
+    <div id="sleepinessData" style="display: none;">
+      <h2>Sleepiness Data</h2>
+      <ion-list id="sleeData">
+        <ion-item *ngFor="let data of sleepinessData">
+          <h3>{{ data.dateString() }}</h3>
+          <p>{{ data.summaryString() }}</p>
+        </ion-item>
+      </ion-list>
+    </div>
+
+</ion-content>

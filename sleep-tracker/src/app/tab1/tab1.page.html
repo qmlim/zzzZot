@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sleep Entry
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="section">
+    <div class="center-x"><br/><hr><hr>
+    <ion-label position="stacked" style="font-size:xx-large;">Bed Time</ion-label>
+    </div><br/><hr>
+    <ion-datetime [(ngModel)]="sleepTimeString" presentation="date-time" prefer-wheel="true" displayFormat="YYYY-MMM-dd HH:mm"></ion-datetime>
+  </div><br/><hr><br/>
+  <div class="section">
+    <div class="center-x">
+      <ion-label position="stacked" style="font-size:xx-large;">Wake Time</ion-label>
+    </div><br/>
+    <ion-datetime [(ngModel)]="wakeTimeString" presentation="date-time" prefer-wheel="true" displayFormat="YYYY-MMM-dd HH:mm"></ion-datetime>
+  </div><br/>
+
+  <div class="center-y" style="display: flex;">
+    <ion-button (click)="logSleep(true)">Log Sleep</ion-button>
+    <ion-alert
+    [isOpen]="isAlertOpen"
+    header="ERROR"
+    message="You must input an End Time date later than the Start Time date."
+    [buttons]="alertButtons"
+    (didDismiss)="messageBoolean(false, false)">
+    </ion-alert>
+    <ion-toast [isOpen]="isToastOpen" message="Logged Data Saved!" position="middle" [duration]="5000" (didDismiss)="messageBoolean(false, false)"></ion-toast>
+  </div>
+</ion-content>
